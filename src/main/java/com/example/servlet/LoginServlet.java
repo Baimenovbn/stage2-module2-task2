@@ -15,7 +15,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Object user =  req.getSession().getAttribute("user");
+        Object user = req.getSession().getAttribute("user");
 
         if (user == null) {
             req.getRequestDispatcher("user/hello.jsp").forward(req, resp);
@@ -27,14 +27,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Object login = req.getAttribute("login");
-        RequestDispatcher dispatcher;
 
-        if (Users.getInstance().getUsers().contains(login) || (login != null && login.equals(""))) {
-            dispatcher = req.getRequestDispatcher("/user/hello.jsp");
+        if ((login != null && Users.getInstance().getUsers().contains(login)) || (login != null && login.equals(""))) {
+            req.getRequestDispatcher("/user/hello.jsp").forward(req, resp);
         } else {
-            dispatcher = req.getRequestDispatcher("/login.jsp");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
         }
-
-        dispatcher.forward(req, resp);
     }
 }
