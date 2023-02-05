@@ -28,7 +28,7 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException {
         if (req instanceof HttpServletRequest && res instanceof HttpServletResponse) {
-            this.doFilter((HttpServletRequest)req, (HttpServletResponse)res, chain);
+            this.doFilter((HttpServletRequest)req, (HttpServletResponse)res);
         } else {
             throw new ServletException("non-HTTP request or response");
         }
