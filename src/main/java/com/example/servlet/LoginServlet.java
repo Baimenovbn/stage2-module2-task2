@@ -26,10 +26,10 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getAttribute("login");
+        String login = (String) req.getAttribute("login");
         RequestDispatcher dispatcher;
 
-        if (Users.getInstance().getUsers().contains(req.getAttribute("login")) || req.getAttribute("password").equals("")) {
+        if (Users.getInstance().getUsers().contains(login) || (login != null && login.equals(""))) {
             dispatcher = req.getRequestDispatcher("/user/hello.jsp");
         } else {
             dispatcher = req.getRequestDispatcher("/login.jsp");
