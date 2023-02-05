@@ -13,11 +13,12 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)  {
         HttpSession session = req.getSession();
-        session.removeAttribute("user");
-        session.invalidate();
+
         try {
+            session.removeAttribute("user");
+            session.invalidate();
             resp.sendRedirect("/login");
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.getLocalizedMessage();
         }
     }

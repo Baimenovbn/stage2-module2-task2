@@ -17,7 +17,7 @@ public class AuthFilter implements Filter {
 
     public void doFilter(HttpServletRequest req, HttpServletResponse res) {
         try {
-            if ((req.getSession().getAttribute("user")) == null) {
+            if (req.getSession() != null && req.getSession().getAttribute("user") == null) {
                 req.getRequestDispatcher("/login.jsp").forward(req, res);
             }
         } catch (IOException | ServletException e) {
